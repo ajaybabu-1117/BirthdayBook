@@ -34,12 +34,6 @@
     class="hidden-img"
   >
 
-  <!-- Hidden Message -->
-  <div id="surpriseMsg" class="hidden-msg">
-    💖 You are truly precious 💖  
-    Never forget how amazing you are ✨
-  </div>
-
   <!-- Button -->
   <button id="nextBtn"
           class="btn"
@@ -60,7 +54,6 @@
 =========================== */
 
 const gift = document.getElementById("giftBox");
-const msg  = document.getElementById("surpriseMsg");
 const next = document.getElementById("nextBtn");
 const img  = document.getElementById("surpriseImg");
 
@@ -86,9 +79,6 @@ gift.addEventListener("click", ()=>{
 
     // Show Image
     img.classList.add("show-img");
-
-    // Show Message
-    fadeIn(msg,600);
 
     // Show Button
     setTimeout(()=>{
@@ -147,7 +137,7 @@ function explode(){
 .gift{
   font-size:90px;
 
-  margin:25px 0;
+  margin:22px 0; /* Reduced space */
 
   cursor:pointer;
 
@@ -189,9 +179,9 @@ function explode(){
 
 .hidden-img{
   width:100%;
-  max-width:260px;
+  max-width:240px;
 
-  margin:15px auto;
+  margin:12px auto;
 
   border-radius:16px;
 
@@ -209,29 +199,6 @@ function explode(){
 .show-img{
   opacity:1;
   transform:scale(1);
-}
-
-
-/* Message */
-
-.hidden-msg{
-  display:none;
-
-  margin:20px 0;
-
-  padding:15px 18px;
-
-  background:rgba(255,255,255,.1);
-
-  border-radius:14px;
-
-  backdrop-filter:blur(8px);
-
-  box-shadow:0 5px 15px #0006;
-
-  font-size:17px;
-
-  line-height:1.6;
 }
 
 
