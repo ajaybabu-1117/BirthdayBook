@@ -22,7 +22,7 @@
   <p>This song is specially for you 😌💖</p>
 
   <!-- Visualizer -->
-  <div class="visualizer">
+  <div class="visualizer" id="viz">
 
     <span></span>
     <span></span>
@@ -36,15 +36,15 @@
   </div>
 
   <!-- Audio -->
-  <audio id="music" autoplay>
+  <audio id="music" preload="auto">
     <source src="audio/mood.mpeg" type="audio/mpeg">
   </audio>
 
   <!-- Controls -->
   <div class="controls">
 
-    <button class="btn small" onclick="toggleMusic()">
-      ▶ / ⏸
+    <button class="btn small" id="playBtn">
+      ▶ Play Music
     </button>
 
   </div>
@@ -65,19 +65,56 @@
    MUSIC LOGIC
 =========================== */
 
-const music = document.getElementById("music");
+const music   = document.getElementById("music");
+const playBtn = document.getElementById("playBtn");
+const viz     = document.getElementById("viz");
 
-let playing = true;
+let playing = false;
 
-function toggleMusic(){
 
-  if(playing){
-    music.pause();
+/* Restore permission */
+if(localStorage.getItem("musicAllowed") === "yes"){
+  playMusic();
+}
+
+
+/* Button Control */
+playBtn.addEventListener("click", ()=>{
+
+  if(!playing){
+    playMusic();
   }else{
-    music.play();
+    pauseMusic();
   }
 
-  playing = !playing;
+});
+
+
+/* Play */
+function playMusic(){
+
+  localStorage.setItem("musicAllowed","yes");
+
+  music.play().catch(()=>{});
+
+  playing = true;
+
+  playBtn.innerHTML = "⏸ Pause";
+
+  viz.classList.add("active");
+}
+
+
+/* Pause */
+function pauseMusic(){
+
+  music.pause();
+
+  playing = false;
+
+  playBtn.innerHTML = "▶ Play Music";
+
+  viz.classList.remove("active");
 }
 
 </script>
@@ -103,6 +140,8 @@ function toggleMusic(){
   gap:6px;
 
   margin:25px 0;
+
+  opacity:.4;
 }
 
 /* Bars */
@@ -113,19 +152,22 @@ function toggleMusic(){
   background:linear-gradient(#00f2ff,#ffd700);
 
   border-radius:10px;
+}
 
+/* Active Animation */
+.visualizer.active span{
   animation:wave 1.2s ease-in-out infinite;
 }
 
 /* Different Delays */
-.visualizer span:nth-child(1){animation-delay:0s;}
-.visualizer span:nth-child(2){animation-delay:.1s;}
-.visualizer span:nth-child(3){animation-delay:.2s;}
-.visualizer span:nth-child(4){animation-delay:.3s;}
-.visualizer span:nth-child(5){animation-delay:.4s;}
-.visualizer span:nth-child(6){animation-delay:.3s;}
-.visualizer span:nth-child(7){animation-delay:.2s;}
-.visualizer span:nth-child(8){animation-delay:.1s;}
+.visualizer.active span:nth-child(1){animation-delay:0s;}
+.visualizer.active span:nth-child(2){animation-delay:.1s;}
+.visualizer.active span:nth-child(3){animation-delay:.2s;}
+.visualizer.active span:nth-child(4){animation-delay:.3s;}
+.visualizer.active span:nth-child(5){animation-delay:.4s;}
+.visualizer.active span:nth-child(6){animation-delay:.3s;}
+.visualizer.active span:nth-child(7){animation-delay:.2s;}
+.visualizer.active span:nth-child(8){animation-delay:.1s;}
 
 /* Wave Animation */
 @keyframes wave{
