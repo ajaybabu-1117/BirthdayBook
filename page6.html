@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Feel This 🎵</title>
+
+<!-- Core Styles -->
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/effects.css">
+
+</head>
+<body>
+
+<div class="card music-card">
+
+  <!-- Title -->
+  <h1>🎧 Feel This Moment</h1>
+
+  <p>This song is specially for you 😌💖</p>
+
+  <!-- Visualizer -->
+  <div class="visualizer">
+
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+
+  </div>
+
+  <!-- Audio -->
+  <audio id="music" autoplay>
+    <source src="audio/mood.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Controls -->
+  <div class="controls">
+
+    <button class="btn small" onclick="toggleMusic()">
+      ▶ / ⏸
+    </button>
+
+  </div>
+
+  <!-- Next -->
+  <button class="btn" onclick="go('page7.html')">
+    Next Page ➡️
+  </button>
+
+</div>
+
+<script src="js/core.js"></script>
+<script src="js/particles.js"></script>
+
+<script>
+
+/* ===========================
+   MUSIC LOGIC
+=========================== */
+
+const music = document.getElementById("music");
+
+let playing = true;
+
+function toggleMusic(){
+
+  if(playing){
+    music.pause();
+  }else{
+    music.play();
+  }
+
+  playing = !playing;
+}
+
+</script>
+
+<style>
+
+/* ===========================
+   MUSIC PAGE DESIGN
+=========================== */
+
+.music-card{
+  background:rgba(10,15,30,.85);
+}
+
+/* Visualizer Box */
+.visualizer{
+  height:120px;
+
+  display:flex;
+  justify-content:center;
+  align-items:flex-end;
+
+  gap:6px;
+
+  margin:25px 0;
+}
+
+/* Bars */
+.visualizer span{
+  width:10px;
+  height:20px;
+
+  background:linear-gradient(#00f2ff,#ffd700);
+
+  border-radius:10px;
+
+  animation:wave 1.2s ease-in-out infinite;
+}
+
+/* Different Delays */
+.visualizer span:nth-child(1){animation-delay:0s;}
+.visualizer span:nth-child(2){animation-delay:.1s;}
+.visualizer span:nth-child(3){animation-delay:.2s;}
+.visualizer span:nth-child(4){animation-delay:.3s;}
+.visualizer span:nth-child(5){animation-delay:.4s;}
+.visualizer span:nth-child(6){animation-delay:.3s;}
+.visualizer span:nth-child(7){animation-delay:.2s;}
+.visualizer span:nth-child(8){animation-delay:.1s;}
+
+/* Wave Animation */
+@keyframes wave{
+  0%{height:20px;}
+  50%{height:90px;}
+  100%{height:20px;}
+}
+
+/* Small Button */
+.small{
+  padding:8px 20px;
+  font-size:14px;
+}
+
+.controls{
+  margin-bottom:15px;
+}
+
+</style>
+
+</body>
+</html>

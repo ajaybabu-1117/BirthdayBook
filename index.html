@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Access Portal</title>
+
+<!-- Core Styles -->
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/effects.css">
+
+</head>
+<body>
+
+<div class="card ai-card">
+
+  <!-- ROBOT FACE -->
+  <div class="robot">
+
+    <div class="eyes">
+      <div class="eye"></div>
+      <div class="eye"></div>
+    </div>
+
+    <div class="mouth" id="mouth"></div>
+
+  </div>
+
+  <!-- BOT TEXT -->
+  <h1 id="botText"></h1>
+
+  <!-- INPUT -->
+  <input
+    id="nameInput"
+    class="input"
+    placeholder="Enter your name"
+    autocomplete="off"
+  >
+
+  <br>
+
+  <!-- BUTTON -->
+  <button class="btn" onclick="verify()">
+    Continue
+  </button>
+
+</div>
+
+<script src="js/core.js"></script>
+<script src="js/particles.js"></script>
+
+<script>
+
+/* ===========================
+   SECURITY SETTINGS
+=========================== */
+
+const allowedNames = [
+  "pavithra",
+  "pavithra andhavarapu",
+  "pavitra",
+  "pavi",
+  "pavithra andavarapu"
+];
+
+/* ===========================
+   ELEMENTS
+=========================== */
+
+const bot   = document.getElementById("botText");
+const input = document.getElementById("nameInput");
+const mouth = document.getElementById("mouth");
+const eyes  = document.querySelectorAll(".eye");
+
+/* ===========================
+   EXPRESSIONS
+=========================== */
+
+function normal(){
+  mouth.className="mouth";
+}
+
+function happy(){
+  mouth.className="mouth happy";
+}
+
+function angry(){
+  mouth.className="mouth angry";
+}
+
+/* ===========================
+   BLINKING
+=========================== */
+
+setInterval(()=>{
+
+  eyes.forEach(e=>e.classList.add("blink"));
+
+  setTimeout(()=>{
+    eyes.forEach(e=>e.classList.remove("blink"));
+  },200);
+
+},3500);
+
+
+/* ===========================
+   MESSAGE QUEUE SYSTEM
+=========================== */
+
+function speakSequence(messages){
+
+  let totalDelay = 0;
+
+  messages.forEach(msg=>{
+
+    setTimeout(()=>{
+
+      normal();
+      typeText("botText", msg.text, 45);
+
+      if(msg.face === "happy") happy();
+      if(msg.face === "angry") angry();
+
+    }, totalDelay);
+
+    totalDelay += msg.text.length * 50 + 800;
+
+  });
+
+}
+
+
+/* ===========================
+   INTRO
+=========================== */
+
+setTimeout(()=>{
+
+  speakSequence([
+    { text:"Initializing secure channel...", face:"normal" },
+    { text:"Identity verification required.", face:"normal" },
+    { text:"Please enter your name.", face:"normal" }
+  ]);
+
+},600);
+
+
+/* ===========================
+   VERIFY
+=========================== */
+
+function verify(){
+
+  let name = input.value
+    .toLowerCase()
+    .replace(/\s+/g," ")
+    .replace(/[^\w\s]/g,"")
+    .trim();
+
+  // EMPTY
+  if(!name){
+
+    speakSequence([
+      { text:"Input required.", face:"angry" }
+    ]);
+
+    return;
+  }
+
+  // CORRECT
+  if(allowedNames.includes(name)){
+
+    saveName(name);
+
+    speakSequence([
+      { text:"Verifying identity...", face:"normal" },
+      { text:"Access granted.", face:"happy" },
+      { text:"Happy Birthday Pavithra 💖", face:"happy" }
+    ]);
+
+    setTimeout(()=>{
+      go("page2.html");
+    },5200);
+
+  }
+
+  // WRONG
+  else{
+
+    speakSequence([
+      { text:"Access denied.", face:"angry" },
+      { text:"This experience is not for you.", face:"angry" }
+    ]);
+
+  }
+
+}
+
+</script>
+
+<style>
+
+/* ===========================
+   AI CARD
+=========================== */
+
+.ai-card{
+  background:rgba(10,15,30,.85);
+}
+
+
+/* ===========================
+   ROBOT FACE
+=========================== */
+
+.robot{
+  width:140px;
+  height:140px;
+
+  margin:0 auto 20px;
+
+  background:linear-gradient(135deg,#0ff,#08f);
+
+  border-radius:50%;
+
+  position:relative;
+
+  box-shadow:
+    0 0 20px #00f2ff,
+    0 0 40px #00f2ff55;
+}
+
+/* EYES */
+
+.eyes{
+  display:flex;
+  justify-content:space-between;
+  padding:40px 28px 0;
+}
+
+.eye{
+  width:22px;
+  height:22px;
+
+  background:#000;
+
+  border-radius:50%;
+
+  position:relative;
+}
+
+.eye::after{
+  content:"";
+  position:absolute;
+
+  width:7px;
+  height:7px;
+
+  background:#fff;
+
+  border-radius:50%;
+
+  top:4px;
+  left:4px;
+}
+
+/* BLINK */
+
+.blink{
+  transform:scaleY(.1);
+}
+
+/* MOUTH */
+
+.mouth{
+  width:45px;
+  height:6px;
+
+  background:#000;
+
+  border-radius:10px;
+
+  margin:18px auto 0;
+
+  transition:.3s;
+}
+
+/* HAPPY */
+
+.mouth.happy{
+  height:22px;
+  border-radius:0 0 50px 50px;
+}
+
+/* ANGRY */
+
+.mouth.angry{
+  background:red;
+  transform:rotate(8deg);
+}
+
+</style>
+
+</body>
+</html>

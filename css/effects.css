@@ -1,0 +1,45 @@
+/* ANIMATED GRADIENT BACKGROUND */
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+
+  background:
+    radial-gradient(circle at 20% 30%,#ff9a9e55,transparent 45%),
+    radial-gradient(circle at 80% 70%,#a18cd155,transparent 45%),
+    radial-gradient(circle at 50% 50%,#00f2ff22,transparent 55%),
+    linear-gradient(120deg,#0f2027,#203a43,#2c5364);
+
+  background-size:260% 260%;
+  animation:bgFlow 28s infinite alternate;
+
+  z-index:-4;
+}
+
+@keyframes bgFlow{
+  from{background-position:0% 50%;}
+  to{background-position:100% 50%;}
+}
+
+/* LIGHT GLOW LAYER */
+
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+
+  background:
+    radial-gradient(circle at center,#ffffff22,transparent 65%);
+
+  z-index:-3;
+}
+
+/* PARTICLE CONTAINER */
+
+#particles{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-2;
+}

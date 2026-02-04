@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Surprise 🎁</title>
+
+<!-- Core Styles -->
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/effects.css">
+
+</head>
+<body>
+
+<div class="card gift-card">
+
+  <!-- Title -->
+  <h1>🎁 A Special Surprise</h1>
+
+  <p>Tap the gift to open it ✨</p>
+
+  <!-- Gift Box -->
+  <div id="giftBox" class="gift">
+    🎁
+  </div>
+
+  <!-- IMAGE (Hidden First) -->
+  <img
+    id="surpriseImg"
+    src="images/surprise.jpeg"
+    alt="Special Memory"
+    class="hidden-img"
+  >
+
+  <!-- Hidden Message -->
+  <div id="surpriseMsg" class="hidden-msg">
+    💖 You are truly precious 💖  
+    Never forget how amazing you are ✨
+  </div>
+
+  <!-- Button -->
+  <button id="nextBtn"
+          class="btn"
+          style="display:none"
+          onclick="go('page9.html')">
+    Final Page ➡️
+  </button>
+
+</div>
+
+<script src="js/core.js"></script>
+<script src="js/particles.js"></script>
+
+<script>
+
+/* ===========================
+   SURPRISE LOGIC
+=========================== */
+
+const gift = document.getElementById("giftBox");
+const msg  = document.getElementById("surpriseMsg");
+const next = document.getElementById("nextBtn");
+const img  = document.getElementById("surpriseImg");
+
+let opened = false;
+
+gift.addEventListener("click", ()=>{
+
+  if(opened) return;
+
+  opened = true;
+
+  // Shake before open
+  gift.classList.add("shake");
+
+  setTimeout(()=>{
+
+    gift.classList.remove("shake");
+
+    // Open Effect
+    gift.innerHTML = "✨🎉✨";
+
+    gift.classList.add("open");
+
+    // Show Image
+    img.classList.add("show-img");
+
+    // Show Message
+    fadeIn(msg,600);
+
+    // Show Button
+    setTimeout(()=>{
+      fadeIn(next,500);
+    },800);
+
+    // Fireworks
+    explode();
+
+  },600);
+
+});
+
+
+/* Firework Effect */
+function explode(){
+
+  for(let i=0;i<50;i++){
+
+    const p = document.createElement("div");
+
+    p.innerHTML =
+      ["✨","💖","🎊","🌟","💫"]
+      [Math.floor(Math.random()*5)];
+
+    p.style.position="fixed";
+
+    p.style.left = "50%";
+    p.style.top  = "45%";
+
+    p.style.fontSize = 14 + Math.random()*24 + "px";
+
+    p.style.animation = "boom 1.2s ease-out";
+
+    document.body.appendChild(p);
+
+    setTimeout(()=>p.remove(),1200);
+  }
+}
+
+</script>
+
+<style>
+
+/* ===========================
+   SURPRISE PAGE DESIGN
+=========================== */
+
+.gift-card{
+  background:rgba(25,10,30,.85);
+}
+
+
+/* Gift Box */
+
+.gift{
+  font-size:90px;
+
+  margin:25px 0;
+
+  cursor:pointer;
+
+  filter:drop-shadow(0 0 15px gold);
+
+  transition:.3s;
+
+  animation:pulse 2s infinite;
+}
+
+/* Pulse */
+@keyframes pulse{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.15);}
+}
+
+/* Shake */
+.shake{
+  animation:shake .6s;
+}
+
+@keyframes shake{
+  0%{transform:rotate(0);}
+  25%{transform:rotate(5deg);}
+  50%{transform:rotate(-5deg);}
+  75%{transform:rotate(5deg);}
+  100%{transform:rotate(0);}
+}
+
+/* Open Glow */
+.open{
+  filter:
+    drop-shadow(0 0 25px gold)
+    drop-shadow(0 0 50px pink);
+}
+
+
+/* IMAGE */
+
+.hidden-img{
+  width:100%;
+  max-width:260px;
+
+  margin:15px auto;
+
+  border-radius:16px;
+
+  box-shadow:0 8px 25px #0008;
+
+  opacity:0;
+  transform:scale(.7);
+
+  transition:.8s ease;
+
+  display:block;
+}
+
+/* Show Image */
+.show-img{
+  opacity:1;
+  transform:scale(1);
+}
+
+
+/* Message */
+
+.hidden-msg{
+  display:none;
+
+  margin:20px 0;
+
+  padding:15px 18px;
+
+  background:rgba(255,255,255,.1);
+
+  border-radius:14px;
+
+  backdrop-filter:blur(8px);
+
+  box-shadow:0 5px 15px #0006;
+
+  font-size:17px;
+
+  line-height:1.6;
+}
+
+
+/* Explosion */
+
+@keyframes boom{
+  from{
+    transform:translate(0,0) scale(.5);
+    opacity:1;
+  }
+  to{
+    transform:
+      translate(
+        (Math.random()*220-110)px,
+        (Math.random()*220-110)px
+      )
+      scale(1.6);
+
+    opacity:0;
+  }
+}
+
+</style>
+
+</body>
+</html>

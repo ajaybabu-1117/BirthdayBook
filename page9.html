@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Always With You ❤️</title>
+
+<!-- Core Styles -->
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/effects.css">
+
+</head>
+<body>
+
+<div class="card end-card">
+
+  <!-- Heart -->
+  <div class="heart">❤️</div>
+
+  <!-- Message -->
+  <h1>For You, Always</h1>
+
+  <p id="finalMsg"></p>
+
+  <!-- Signature -->
+  <div class="sign">
+    – Ajvi 💖
+  </div>
+
+</div>
+
+<script src="js/core.js"></script>
+<script src="js/particles.js"></script>
+
+<script>
+
+/* ===========================
+   FINAL MESSAGE
+=========================== */
+
+const name = getName() || "Pavithra";
+
+const message = `
+Dear ${name},
+
+May your life be full of smiles,
+dreams, and beautiful moments.
+
+Never forget how special you are.
+
+I only wish for your happiness,
+with me or without me.
+
+As long as you smile,
+that is enough for me 💖
+
+This is just for you.
+`;
+
+typeText("finalMsg", message, 42);
+
+</script>
+
+<style>
+
+/* ===========================
+   FINAL PAGE DESIGN
+=========================== */
+
+.end-card{
+  background:rgba(15,10,25,.9);
+}
+
+/* Heart Animation */
+.heart{
+  font-size:80px;
+  margin-bottom:15px;
+
+  animation:beat 1.5s infinite;
+}
+
+@keyframes beat{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.3);}
+}
+
+/* Signature */
+.sign{
+  margin-top:25px;
+
+  font-size:18px;
+  font-weight:500;
+
+  color:gold;
+
+  text-shadow:0 0 10px gold;
+}
+
+</style>
+
+</body>
+</html>

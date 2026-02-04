@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Our Memories 🌈</title>
+
+<!-- Core Styles -->
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/effects.css">
+
+</head>
+<body>
+
+<div class="card memory-card">
+
+  <!-- Title -->
+  <h1>🌈 Beautiful Moments</h1>
+
+  <!-- Timeline -->
+  <div class="timeline">
+
+    <<div class="memory">
+  <span>😊</span>
+  <p>Your smile that makes me feel safe and comfortable</p>
+</div>
+
+<div class="memory">
+  <span>💖</span>
+  <p>Your kind heart that always thinks about me first</p>
+</div>
+
+<div class="memory">
+  <span>🌸</span>
+  <p>Your character that stays pure even in difficult situations</p>
+</div>
+
+<div class="memory">
+  <span>💎</span>
+  <p>Your honesty and values that make you truly special</p>
+</div>
+
+
+
+
+  <!-- Button -->
+  <button class="btn" onclick="go('page5.html')">
+    Next Page ➡️
+  </button>
+
+</div>
+
+<script src="js/core.js"></script>
+<script src="js/particles.js"></script>
+
+<style>
+
+/* ===========================
+   MEMORY PAGE DESIGN
+=========================== */
+
+.memory-card{
+  background:rgba(20,30,50,.8);
+}
+
+/* Timeline */
+.timeline{
+  margin:25px 0;
+  position:relative;
+}
+
+/* Vertical Line */
+.timeline::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:0;
+  bottom:0;
+
+  width:4px;
+
+  background:linear-gradient(#ffd700,#ff69b4,#00f2ff);
+
+  border-radius:10px;
+
+  box-shadow:0 0 15px gold;
+}
+
+/* Memory Box */
+.memory{
+  width:80%;
+  margin:25px auto;
+
+  padding:16px 18px;
+
+  background:rgba(255,255,255,.08);
+
+  border-radius:14px;
+
+  backdrop-filter:blur(10px);
+
+  box-shadow:0 5px 20px #0006;
+
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  animation:slideIn 1s ease both;
+}
+
+/* Alternate Left/Right */
+.memory:nth-child(even){
+  transform:translateX(20px);
+}
+
+.memory:nth-child(odd){
+  transform:translateX(-20px);
+}
+
+/* Emoji */
+.memory span{
+  font-size:26px;
+  filter:drop-shadow(0 0 5px gold);
+}
+
+/* Text */
+.memory p{
+  margin:0;
+  font-size:16px;
+  color:#fff;
+}
+
+/* Entry Animation */
+@keyframes slideIn{
+  from{
+    opacity:0;
+    transform:translateY(30px) scale(.9);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+
+/* Stagger Effect */
+.memory:nth-child(1){animation-delay:.2s;}
+.memory:nth-child(2){animation-delay:.4s;}
+.memory:nth-child(3){animation-delay:.6s;}
+.memory:nth-child(4){animation-delay:.8s;}
+.memory:nth-child(5){animation-delay:1s;}
+
+</style>
+
+</body>
+</html>

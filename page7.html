@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>You Are Amazing 🌟</title>
+
+<!-- Core Styles -->
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/effects.css">
+
+</head>
+<body>
+
+<div class="card smile-card">
+
+  <!-- Title -->
+  <h1>🌟 You Are...</h1>
+
+  <!-- Compliment Bubbles -->
+  <div class="bubble-area">
+
+    <div class="bubble">😍 Amazing</div>
+    <div class="bubble">✨ Talented</div>
+    <div class="bubble">💖 Beautiful</div>
+    <div class="bubble">🌸 Kind</div>
+    <div class="bubble">🔥 Strong</div>
+    <div class="bubble">🌈 Wonderful</div>
+    <div class="bubble">👑 Special</div>
+    <div class="bubble">💫 Unique</div>
+
+  </div>
+
+  <!-- Message -->
+  <p id="note"></p>
+
+  <!-- Button -->
+  <button class="btn" onclick="go('page8.html')">
+    Next Page ➡️
+  </button>
+
+</div>
+
+<script src="js/core.js"></script>
+<script src="js/particles.js"></script>
+
+<script>
+
+/* ===========================
+   PAGE LOGIC
+=========================== */
+
+typeText(
+  "note",
+  "Every word here is true about you 💖",
+  50
+);
+
+</script>
+
+<style>
+
+/* ===========================
+   SMILE PAGE DESIGN
+=========================== */
+
+.smile-card{
+  background:rgba(25,15,35,.85);
+}
+
+/* Bubble Area */
+.bubble-area{
+  position:relative;
+
+  height:260px;
+
+  margin:25px 0;
+
+  overflow:hidden;
+}
+
+/* Bubble Style */
+.bubble{
+  position:absolute;
+
+  padding:10px 16px;
+
+  background:rgba(255,255,255,.12);
+
+  border-radius:25px;
+
+  backdrop-filter:blur(8px);
+
+  font-size:15px;
+  font-weight:500;
+
+  box-shadow:0 5px 15px #0005;
+
+  animation:floatBubble 8s linear infinite;
+
+  cursor:default;
+}
+
+/* Individual Positions */
+.bubble:nth-child(1){left:10%; animation-delay:0s;}
+.bubble:nth-child(2){left:60%; animation-delay:1s;}
+.bubble:nth-child(3){left:30%; animation-delay:2s;}
+.bubble:nth-child(4){left:70%; animation-delay:3s;}
+.bubble:nth-child(5){left:20%; animation-delay:4s;}
+.bubble:nth-child(6){left:50%; animation-delay:5s;}
+.bubble:nth-child(7){left:80%; animation-delay:6s;}
+.bubble:nth-child(8){left:40%; animation-delay:7s;}
+
+/* Floating Animation */
+@keyframes floatBubble{
+  from{
+    bottom:-60px;
+    opacity:0;
+    transform:scale(.7);
+  }
+  20%{
+    opacity:1;
+  }
+  to{
+    bottom:280px;
+    opacity:0;
+    transform:scale(1.1);
+  }
+}
+
+/* Hover Effect */
+.bubble:hover{
+  background:rgba(255,215,0,.25);
+  transform:scale(1.2);
+  box-shadow:0 0 20px gold;
+}
+
+</style>
+
+</body>
+</html>

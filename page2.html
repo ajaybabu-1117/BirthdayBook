@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Birthday Celebration 🎉</title>
+
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/effects.css">
+
+</head>
+<body>
+
+<!-- Festival Overlay -->
+<div id="festival"></div>
+
+<div class="card party-card">
+
+  <h1 class="float">🎉 Happy Birthday 🎉</h1>
+
+  <!-- 3D CAKE -->
+  <div id="cake" class="cake3d">
+
+    <div class="tier tier3"></div>
+    <div class="tier tier2"></div>
+    <div class="tier tier1"></div>
+
+    <div class="candle">🕯️</div>
+
+  </div>
+
+  <p id="msg"></p>
+
+  <button class="btn" onclick="go('page3.html')">
+    Turn Page ➡️
+  </button>
+
+  <!-- AUDIO -->
+  <audio id="song" loop preload="auto">
+    <source src="audio/birthday.mpeg" type="audio/mpeg">
+  </audio>
+
+</div>
+
+<script src="js/core.js"></script>
+<script src="js/particles.js"></script>
+
+<script>
+
+/* TEXT */
+typeText("msg","Tap the cake to start the celebration 🎂🎆",45);
+
+const cake = document.getElementById("cake");
+const fest = document.getElementById("festival");
+const song = document.getElementById("song");
+
+let playing = false;
+
+
+/* AUTO PLAY WHEN RETURNING */
+if(localStorage.getItem("musicAllowed") === "yes"){
+  song.play().catch(()=>{});
+}
+
+
+/* CLICK EVENT */
+cake.addEventListener("click",()=>{
+
+  /* Allow future autoplay */
+  localStorage.setItem("musicAllowed","yes");
+
+  /* Play music */
+  song.play().catch(()=>{});
+
+  if(playing) return;
+  playing = true;
+
+  cake.classList.add("party");
+  fest.classList.add("active");
+
+  megaFireworks();
+  sparkleRain();
+  crackerBurst();
+
+  setTimeout(()=>{
+    fest.classList.remove("active");
+    cake.classList.remove("party");
+    playing=false;
+  },3500);
+
+});
+
+
+/* FIREWORKS */
+function megaFireworks(){
+
+  for(let i=0;i<150;i++){
+
+    const f=document.createElement("div");
+
+    f.innerHTML="🎆";
+    f.className="fire";
+
+    f.style.left=Math.random()*100+"vw";
+    f.style.top=Math.random()*100+"vh";
+
+    document.body.appendChild(f);
+
+    setTimeout(()=>f.remove(),2000);
+  }
+}
+
+
+/* SPARKLES */
+function sparkleRain(){
+
+  for(let i=0;i<200;i++){
+
+    const s=document.createElement("div");
+
+    s.innerHTML="✨";
+    s.className="spark";
+
+    s.style.left=Math.random()*100+"vw";
+
+    document.body.appendChild(s);
+
+    setTimeout(()=>s.remove(),2500);
+  }
+}
+
+
+/* CRACKERS */
+function crackerBurst(){
+
+  for(let i=0;i<80;i++){
+
+    const c=document.createElement("div");
+
+    c.innerHTML="💥";
+    c.className="cracker";
+
+    c.style.left="50%";
+    c.style.top="50%";
+
+    document.body.appendChild(c);
+
+    setTimeout(()=>c.remove(),1500);
+  }
+}
+
+</script>
+
+<style>
+
+/* PAGE */
+
+.party-card{
+  background:rgba(15,10,30,.9);
+  overflow:hidden;
+}
+
+
+/* FESTIVAL OVERLAY */
+
+#festival{
+  position:fixed;
+  inset:0;
+
+  background:
+    radial-gradient(circle,#ff0,#f0f,#00f);
+
+  opacity:0;
+  pointer-events:none;
+  z-index:999;
+}
+
+#festival.active{
+  animation:festivalGlow 3s;
+}
+
+@keyframes festivalGlow{
+
+  0%{opacity:0;}
+  30%{opacity:.6;}
+  60%{opacity:.3;}
+  100%{opacity:0;}
+}
+
+
+/* 3D CAKE */
+
+.cake3d{
+  width:180px;
+  margin:30px auto;
+
+  position:relative;
+  cursor:pointer;
+
+  transform-style:preserve-3d;
+  transition:.4s;
+}
+
+
+/* TIERS */
+
+.tier{
+  width:100%;
+  height:35px;
+
+  border-radius:18px;
+  margin:4px 0;
+
+  box-shadow:0 5px 15px #0007;
+}
+
+
+/* Bottom */
+.tier1{
+  background:linear-gradient(#ff69b4,#ff1493);
+}
+
+
+/* Middle */
+.tier2{
+  width:85%;
+  margin:4px auto;
+
+  background:linear-gradient(#ffd700,#ffa500);
+}
+
+
+/* Top */
+.tier3{
+  width:70%;
+  margin:4px auto;
+
+  background:linear-gradient(#00f2ff,#0077ff);
+}
+
+
+/* Candle */
+
+.candle{
+  font-size:26px;
+
+  position:absolute;
+
+  top:-28px;
+  left:50%;
+
+  transform:translateX(-50%);
+
+  animation:flicker 1s infinite;
+}
+
+@keyframes flicker{
+  0%,100%{opacity:1;}
+  50%{opacity:.6;}
+}
+
+
+/* PARTY MODE */
+
+.party{
+  animation:cakeDance 2s ease;
+}
+
+@keyframes cakeDance{
+
+  0%{transform:scale(1) rotate(0);}
+  25%{transform:scale(1.3) rotate(12deg);}
+  50%{transform:scale(1.4) rotate(-12deg);}
+  75%{transform:scale(1.3) rotate(8deg);}
+  100%{transform:scale(1) rotate(0);}
+}
+
+
+/* FIREWORK */
+
+.fire{
+  position:fixed;
+  font-size:26px;
+
+  animation:firework 2s ease-out;
+}
+
+@keyframes firework{
+
+  from{
+    transform:scale(.5);
+    opacity:1;
+  }
+
+  to{
+    transform:scale(2);
+    opacity:0;
+  }
+}
+
+
+/* SPARK */
+
+.spark{
+  position:fixed;
+  top:-20px;
+
+  font-size:18px;
+
+  animation:sparkFall 2.5s linear;
+}
+
+@keyframes sparkFall{
+
+  to{
+    transform:translateY(120vh);
+    opacity:0;
+  }
+}
+
+
+/* CRACKER */
+
+.cracker{
+  position:fixed;
+  font-size:22px;
+
+  animation:cracker 1.5s ease-out;
+}
+
+@keyframes cracker{
+
+  from{
+    transform:scale(.5);
+    opacity:1;
+  }
+
+  to{
+    transform:
+      translate(
+        (Math.random()*400-200)px,
+        (Math.random()*400-200)px
+      )
+      scale(2);
+
+    opacity:0;
+  }
+}
+
+</style>
+
+</body>
+</html>

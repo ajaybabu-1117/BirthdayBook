@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Wish 💌</title>
+
+<!-- Core Styles -->
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/effects.css">
+
+<!-- Google Font (Handwriting Style) -->
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+<div class="card letter-card">
+
+  <!-- Title -->
+  <h1>💌 My Wish For You</h1>
+
+  <!-- Letter Area -->
+  <div class="paper">
+
+    <p id="letterText"></p>
+
+    <span class="cursor">|</span>
+
+  </div>
+
+  <!-- Button -->
+  <button class="btn" onclick="go('page4.html')">
+    Next Page ➡️
+  </button>
+
+</div>
+
+<script src="js/core.js"></script>
+<script src="js/particles.js"></script>
+
+<script>
+
+/* ===========================
+   LETTER CONTENT
+=========================== */
+
+const name = getName() || "Pavithra";
+
+const letter = `
+Dear ${name},
+
+On this special day, I wish you
+endless happiness, peace,
+and beautiful moments.
+
+May every dream of yours
+turn into reality.
+
+May your smile always shine,
+and your heart stay strong.
+
+You deserve the best in life.
+
+Happy Birthday 💖✨
+`;
+
+// Type letter
+typeText("letterText", letter, 45);
+
+</script>
+
+<style>
+
+/* ===========================
+   LETTER DESIGN
+=========================== */
+
+.letter-card{
+  background:rgba(30,20,40,.85);
+}
+
+/* Paper Effect */
+.paper{
+  background:linear-gradient(#ffffff,#f3f7ff);
+
+  /* STRONG BLUE INK */
+  color:#062a6f;          /* Deep royal blue */
+  font-weight:700;       /* Bold */
+
+  /* Remove blur completely */
+  text-shadow:none;
+
+  padding:26px 22px;
+  margin:20px 0;
+
+  border-radius:16px;
+
+  box-shadow:
+    inset 0 0 12px #0001,
+    0 8px 22px #0004;
+
+  font-family:"Pacifico",cursive;
+
+  font-size:19px;
+
+  line-height:2;
+
+  position:relative;
+
+  min-height:250px;
+
+  animation:paperIn 1s ease;
+}
+
+/* Paper Entry */
+@keyframes paperIn{
+  from{
+    opacity:0;
+    transform:scale(.9) rotateX(15deg);
+  }
+  to{
+    opacity:1;
+    transform:scale(1) rotateX(0);
+  }
+}
+
+/* Cursor */
+.cursor{
+  display:inline-block;
+  margin-left:5px;
+
+  color:#062a6f;
+
+  font-weight:700;
+
+  animation:blink 1s infinite;
+}
+
+@keyframes blink{
+  0%,50%{opacity:1;}
+  51%,100%{opacity:0;}
+}
+
+</style>
+
+</body>
+</html>

@@ -1,0 +1,138 @@
+/* RESET */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:"Segoe UI",system-ui,sans-serif;
+}
+
+/* BODY */
+body{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#05070f;
+  color:#fff;
+  overflow:hidden;
+}
+
+/* MAIN CARD (GLASS UI) */
+.card{
+  width:90%;
+  max-width:520px;
+  padding:32px;
+  text-align:center;
+
+  background:rgba(18,22,40,0.78);
+  backdrop-filter:blur(18px);
+
+  border-radius:24px;
+  border:1px solid rgba(255,255,255,0.12);
+
+  box-shadow:
+    0 25px 60px rgba(0,0,0,.6),
+    inset 0 0 30px rgba(255,255,255,.05);
+
+  animation:cardIn .9s ease;
+}
+
+@keyframes cardIn{
+  from{
+    opacity:0;
+    transform:translateY(40px) scale(.9);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+
+/* TITLES */
+h1{
+  font-size:clamp(26px,6vw,44px);
+  letter-spacing:1px;
+  margin-bottom:10px;
+
+  text-shadow:
+    0 0 10px gold,
+    0 0 25px rgba(255,215,0,.5);
+}
+
+/* PARAGRAPH (DEFAULT) */
+p{
+  font-size:clamp(16px,4vw,20px);
+  line-height:1.7;
+
+  /* Softer white for normal pages */
+  color:#e8e8e8;
+
+  margin:18px 0;
+}
+
+/* LETTER PAGE OVERRIDE */
+.paper p{
+  color:#062a6f;        /* Deep blue ink */
+  font-weight:700;
+}
+
+/* BUTTON */
+.btn{
+  margin-top:24px;
+  padding:12px 34px;
+
+  border:none;
+  border-radius:28px;
+
+  background:linear-gradient(45deg,#ffd700,#ff9800);
+  color:#111;
+
+  font-size:16px;
+  font-weight:600;
+
+  cursor:pointer;
+  transition:.3s ease;
+
+  box-shadow:0 8px 20px rgba(0,0,0,.5);
+}
+
+.btn:hover{
+  transform:scale(1.12);
+  box-shadow:0 0 25px gold;
+}
+
+/* INPUT */
+.input{
+  width:80%;
+  max-width:280px;
+
+  padding:12px 14px;
+  margin-top:14px;
+
+  border:none;
+  border-radius:14px;
+
+  background:#0d1225;
+  color:#fff;
+
+  outline:none;
+  text-align:center;
+
+  font-size:16px;
+
+  box-shadow:inset 0 0 12px rgba(0,255,255,.25);
+}
+
+.input::placeholder{
+  color:#aaa;
+}
+
+/* FLOAT */
+.float{
+  animation:float 3s ease-in-out infinite alternate;
+}
+
+@keyframes float{
+  from{transform:translateY(0);}
+  to{transform:translateY(-16px);}
+}
